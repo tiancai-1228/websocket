@@ -9,6 +9,7 @@
   <body>
     <textarea id="txtShow" disabled></textarea>
     <input id="txtInput" type="text" />
+
     <button id="btnSend">送出</button>
   </body>
 
@@ -16,10 +17,11 @@
     document.addEventListener("DOMContentLoaded", (event) => {
       console.log(event);
       let keyinDom = document.querySelector("#txtInput");
+
       let showDom = document.querySelector("#txtShow");
 
       document.querySelector("#btnSend").addEventListener("click", () => {
-        let txt = keyinDom.value;
+        let txt = ["robby", keyinDom.value];
         ws.send(txt);
         console.log("in", txt);
       });
@@ -36,7 +38,8 @@
       };
       //接收 Server 發送的訊息
       ws.onmessage = (event) => {
-        let txt = event.data;
+        let txt = event.data.split(",")[1];
+        console.log(txt);
         if (!showDom.value) showDom.value = txt;
         else showDom.value = showDom.value + "\n" + txt;
         keyinDom.value = "";
