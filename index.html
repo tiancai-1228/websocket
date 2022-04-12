@@ -1,13 +1,21 @@
 <html>
   <head>
     <script>
+      // 建立 WebSocket (本例 server 端於本地運行)
       let HOST = location.origin.replace(/^http/, "ws");
       let ws = new WebSocket(HOST);
-      let el;
       console.log("HOST:", HOST);
+      // 監聽連線狀態
+      ws.onopen = () => {
+        console.log("open ");
+      };
+      ws.onclose = () => {
+        console.log("close ");
+      };
+      //接收 Server 發送的訊息
       ws.onmessage = (event) => {
-        el = document.getElementById("server-time");
-        el.innerHTML = "Server time: " + event.data;
+        let txt = event.data;
+        console.log(event);
       };
     </script>
   </head>
