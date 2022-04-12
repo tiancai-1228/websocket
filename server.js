@@ -18,9 +18,6 @@ wss.on("connection", (ws) => {
     data = data.toString();
     console.log(data); // 可在 terminal 看收到的訊息
 
-    /// 發送消息給client
-    // ws.send(data);
-
     /// 發送給所有client：
 
     let clients = wss.clients; //取得所有連接中的 client
